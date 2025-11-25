@@ -29,7 +29,8 @@ class Trainer:
         max_epochs=200,
         patience=30,
         checkpoint_dir='checkpoints',
-        log_interval=50
+        log_interval=50,
+        logger=None
     ):
         self.model = model.to(device)
         self.train_loader = train_loader
@@ -60,6 +61,7 @@ class Trainer:
         self.patience = patience
         self.checkpoint_dir = checkpoint_dir
         self.log_interval = log_interval
+        self.logger = logger
         
         # Tracking
         self.best_val_acc = 0.0

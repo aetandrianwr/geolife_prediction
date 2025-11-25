@@ -1,0 +1,21 @@
+Experiment: model_v2
+Config: configs/model_v2.yml
+Seed: 42
+================================================================================
+
+MODEL:
+  d_model: 88
+  n_layers: 4
+  n_head: 8
+  dropout: 0.15
+  Parameters: 481,458
+
+RESULTS:
+  Test Acc@1:  36.58%
+  Test Acc@5:  56.91%
+  Test Acc@10: 59.19%
+  Test MRR:    45.89%
+  Test NDCG:   48.94%
+
+  Best Val Acc@1: 43.43%
+  Best Epoch: 18

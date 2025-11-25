@@ -1,0 +1,38 @@
+# Model v1: 96d, 3 layers
+# Test Acc@1: 35.21%
+# Parameters: 477,215
+
+model:
+  name: model_v1
+  d_model: 96
+  d_inner: 192
+  n_layers: 3
+  n_head: 8
+  d_k: 12
+  d_v: 12
+  dropout: 0.15
+  max_len: 50
+
+training:
+  batch_size: 64
+  learning_rate: 0.0005
+  weight_decay: 0.0001
+  label_smoothing: 0.1
+  max_epochs: 200
+  patience: 30
+  log_interval: 50
+
+data:
+  data_dir: /content/another_try_20251125/data/geolife
+  max_len: 50
+  num_workers: 0
+
+experiment:
+  name: model_v1
+  seed: 42
+  device: cuda
+  checkpoint_dir: checkpoints
+  log_dir: logs
+  result_dir: results
+  save_best_only: true
+  deterministic: true
