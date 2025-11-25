@@ -1,0 +1,26 @@
+================================================================================
+GEOLIFE NEXT-LOCATION PREDICTION
+Target: 40% Test Acc@1 | Parameter Budget: <500K
+================================================================================
+
+Loading data...
+Train: 7424 | Val: 3334 | Test: 3502
+Locations: 1187 | Users: 46
+
+================================================================================
+CHECKING MODEL CONFIGURATIONS
+================================================================================
+
+Model_v1:
+  Parameters: 744,435
+  Budget OK: False
+
+Model_v2:
+  Parameters: 705,177
+  Budget OK: False
+
+Model_v3:
+  Parameters: 898,397
+  Budget OK: False
+
+❌ No valid configurations found!
