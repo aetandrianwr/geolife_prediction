@@ -1,0 +1,12 @@
+Configuration: Model_v2_88d_4L
+================================================================================
+
+Test Acc@1: 37.95%
+Test Acc@5: 56.54%
+Test Acc@10: 58.97%
+Test MRR: 46.39%
+Test NDCG: 49.25%
+
+Model Parameters: 481,458
+Best Val Acc@1: 43.70%
+Best Epoch: 18

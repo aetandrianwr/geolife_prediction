@@ -1,0 +1,12 @@
+Configuration: Model_v3_80d
+================================================================================
+
+Test Acc@1: 36.29%
+Test Acc@5: 56.68%
+Test Acc@10: 60.37%
+Test MRR: 45.78%
+Test NDCG: 49.03%
+
+Model Parameters: 363,957
+Best Val Acc@1: 42.44%
+Best Epoch: 8

@@ -1,0 +1,14 @@
+Configuration: Model_Enhanced_96d
+================================================================================
+
+ENHANCED MODEL WITH BETTER GENERALIZATION
+
+Test Acc@1: 36.89%
+Test Acc@5: 56.54%
+Test Acc@10: 59.11%
+Test MRR: 45.80%
+Test NDCG: 48.84%
+
+Model Parameters: 477,215
+Best Val Acc@1: 43.28%
+Best Epoch: 17
