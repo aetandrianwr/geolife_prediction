@@ -156,8 +156,6 @@ def main():
         d_inner=config.model['d_inner'],
         n_layers=config.model['n_layers'],
         n_head=config.model['n_head'],
-        d_k=config.model['d_k'],
-        d_v=config.model['d_v'],
         dropout=config.model['dropout'],
         max_len=config.model['max_len']
     )
