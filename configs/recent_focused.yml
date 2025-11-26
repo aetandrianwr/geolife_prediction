@@ -1,0 +1,33 @@
+# Recent-Focused Model Configuration
+# Exploits key insight: 88% of returns are to last 5 locations!
+# Oracle baseline: predicting any of last 3 = 65.53%
+
+model:
+  name: recent_focused
+  d_model: 96
+  dropout: 0.15
+  max_recent: 5
+
+training:
+  batch_size: 64
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  label_smoothing: 0.05
+  max_epochs: 100
+  patience: 20
+  log_interval: 50
+
+data:
+  data_dir: /content/geolife_prediction/data/geolife
+  max_len: 50
+  num_workers: 0
+
+experiment:
+  name: recent_focused
+  seed: 42
+  device: cuda
+  checkpoint_dir: checkpoints
+  log_dir: logs
+  result_dir: results
+  save_best_only: true
+  deterministic: true
