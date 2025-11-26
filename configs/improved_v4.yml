@@ -1,0 +1,38 @@
+# Improved Model v4: Enhanced Baseline
+# Using proven architecture with optimized training
+# Focus on reducing val-test gap
+
+model:
+  name: improved_v4
+  d_model: 88  # Same as proven best
+  d_inner: 176  # Same as proven best 
+  n_layers: 4
+  n_head: 8
+  d_k: 11
+  d_v: 11
+  dropout: 0.18  # Slightly higher than 0.15
+  max_len: 50
+
+training:
+  batch_size: 64
+  learning_rate: 0.0006
+  weight_decay: 0.0002
+  label_smoothing: 0.12
+  max_epochs: 250
+  patience: 45
+  log_interval: 50
+
+data:
+  data_dir: /content/geolife_prediction/data/geolife
+  max_len: 50
+  num_workers: 0
+
+experiment:
+  name: improved_v4
+  seed: 456  # Different seed for diversity
+  device: cuda
+  checkpoint_dir: checkpoints
+  log_dir: logs
+  result_dir: results
+  save_best_only: true
+  deterministic: true

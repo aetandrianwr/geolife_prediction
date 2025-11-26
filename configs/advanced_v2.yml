@@ -1,0 +1,43 @@
+# Advanced Model v2: Anti-Overfitting Focus
+# Strong regularization to combat overfitting
+# Target: Bridge validation-test gap
+
+model:
+  name: advanced_v2
+  d_model: 88
+  d_inner: 220
+  n_layers: 4
+  n_head: 8
+  d_k: 11
+  d_v: 11
+  dropout: 0.25  # Much higher dropout
+  max_len: 50
+
+training:
+  batch_size: 64
+  learning_rate: 0.0003  # Lower LR for stability
+  weight_decay: 0.001  # Much stronger weight decay
+  label_smoothing: 0.15  # Higher smoothing
+  max_epochs: 300
+  patience: 50  # More patience
+  log_interval: 50
+  grad_accum_steps: 1
+  warmup_epochs: 15  # Longer warmup
+  use_swa: true
+  swa_start: 200
+  swa_lr: 0.00003
+
+data:
+  data_dir: /content/geolife_prediction/data/geolife
+  max_len: 50
+  num_workers: 0
+
+experiment:
+  name: advanced_v2
+  seed: 123  # Different seed
+  device: cuda
+  checkpoint_dir: checkpoints
+  log_dir: logs
+  result_dir: results
+  save_best_only: true
+  deterministic: true
