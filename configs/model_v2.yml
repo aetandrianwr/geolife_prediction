@@ -26,7 +26,7 @@ training:
   log_interval: 50
 
 data:
-  data_dir: /content/another_try_20251125/data/geolife
+  data_dir: /content/geolife_prediction/data/geolife
   max_len: 50
   num_workers: 0
 
