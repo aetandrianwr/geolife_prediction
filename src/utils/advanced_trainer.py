@@ -21,7 +21,7 @@ import numpy as np
 from tqdm import tqdm
 import copy
 
-from src.utils.metrics import calculate_metrics
+from src.utils.metrics import calculate_correct_total_prediction, get_performance_dict
 
 
 class LabelSmoothingCrossEntropy(nn.Module):
@@ -194,13 +194,28 @@ class AdvancedTrainer:
             with autocast():
                 logits = model(batch)
             
-            all_logits.append(logits.cpu())
+            # Convert to float32 for CPU compatibility
+            all_logits.append(logits.float().cpu())
             all_targets.append(batch['target'].cpu())
         
         all_logits = torch.cat(all_logits, dim=0)
         all_targets = torch.cat(all_targets, dim=0)
         
-        metrics = calculate_metrics(all_logits, all_targets, num_locations=self.num_locations)
+        # Calculate metrics using existing function
+        result_array, _, _ = calculate_correct_total_prediction(all_logits, all_targets)
+        
+        return_dict = {
+            "correct@1": result_array[0],
+            "correct@3": result_array[1],
+            "correct@5": result_array[2],
+            "correct@10": result_array[3],
+            "rr": result_array[4],
+            "ndcg": result_array[5],
+            "f1": 0.0,  # Not used
+            "total": result_array[6]
+        }
+        
+        metrics = get_performance_dict(return_dict)
         
         return metrics
     
@@ -230,13 +245,28 @@ class AdvancedTrainer:
             # Average predictions
             logits = (logits1 + logits2 + logits3) / 3.0
             
-            all_logits.append(logits.cpu())
+            # Convert to float32 for CPU compatibility
+            all_logits.append(logits.float().cpu())
             all_targets.append(batch['target'].cpu())
         
         all_logits = torch.cat(all_logits, dim=0)
         all_targets = torch.cat(all_targets, dim=0)
         
-        metrics = calculate_metrics(all_logits, all_targets, num_locations=self.num_locations)
+        # Calculate metrics using existing function
+        result_array, _, _ = calculate_correct_total_prediction(all_logits, all_targets)
+        
+        return_dict = {
+            "correct@1": result_array[0],
+            "correct@3": result_array[1],
+            "correct@5": result_array[2],
+            "correct@10": result_array[3],
+            "rr": result_array[4],
+            "ndcg": result_array[5],
+            "f1": 0.0,
+            "total": result_array[6]
+        }
+        
+        metrics = get_performance_dict(return_dict)
         
         return metrics
     

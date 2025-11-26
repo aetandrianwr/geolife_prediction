@@ -36,9 +36,13 @@ class RotaryPositionEmbedding(nn.Module):
     
     def __init__(self, dim, max_len=512):
         super().__init__()
+        # Ensure even dimension
+        if dim % 2 != 0:
+            dim = dim + 1
         inv_freq = 1.0 / (10000 ** (torch.arange(0, dim, 2).float() / dim))
         self.register_buffer('inv_freq', inv_freq)
         self.max_len = max_len
+        self.dim = dim
         
     def forward(self, seq_len, device):
         t = torch.arange(seq_len, device=device).type_as(self.inv_freq)
@@ -55,6 +59,16 @@ def rotate_half(x):
 
 def apply_rotary_pos_emb(q, k, cos, sin):
     """Apply rotary position embedding."""
+    # Handle odd dimensions by padding
+    if q.size(-1) % 2 != 0:
+        q = F.pad(q, (0, 1))
+        k = F.pad(k, (0, 1))
+        
+    # Match dimensions if needed
+    if cos.size(-1) != q.size(-1):
+        cos = cos[..., :q.size(-1)]
+        sin = sin[..., :q.size(-1)]
+    
     q_embed = (q * cos) + (rotate_half(q) * sin)
     k_embed = (k * cos) + (rotate_half(k) * sin)
     return q_embed, k_embed
@@ -106,7 +120,7 @@ class MultiHeadAttentionRoPE(nn.Module):
         attn = torch.matmul(q, k.transpose(-2, -1)) * self.scale
         
         if mask is not None:
-            attn = attn.masked_fill(mask == 0, -1e9)
+            attn = attn.masked_fill(mask == 0, -65000.0)  # Safe for fp16
         
         attn = self.dropout(F.softmax(attn, dim=-1))
         output = torch.matmul(attn, v)
