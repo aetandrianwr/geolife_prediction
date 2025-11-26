@@ -22,7 +22,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
 from src.data.dataset import get_dataloaders
-from src.models.recent_focus_model import RecentInformedModel
+from src.models.recent_focus_model import RecentFocusedModel
 from src.utils.trainer import Trainer
 from src.utils.config import get_config, save_config, print_config
 from src.utils.logger import setup_logger, log_experiment_info
@@ -91,13 +91,12 @@ def main():
     logger.info("  6. ✓ Ensemble of all signals")
     logger.info("="*80)
     
-    model = RecentInformedModel(
+    model = RecentFocusedModel(
         num_locations=dataset_info['num_locations'],
         num_users=dataset_info['num_users'],
         d_model=config.model['d_model'],
-        n_layers=config.model['n_layers'],
-        n_head=config.model['n_head'],
-        dropout=config.model['dropout']
+        dropout=config.model['dropout'],
+        max_recent=config.model.get('max_recent', 5)
     )
     
     num_params = model.count_parameters()
