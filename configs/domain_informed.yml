@@ -1,0 +1,35 @@
+# Domain-Informed Model Configuration
+# Based on human mobility domain knowledge
+# Key insights: 83.8% return rate, strong transitions, user habits
+
+model:
+  name: domain_informed
+  d_model: 64
+  n_layers: 1
+  n_head: 4
+  dropout: 0.15
+
+training:
+  batch_size: 64
+  learning_rate: 0.001  # Higher LR for faster learning
+  weight_decay: 0.0001
+  label_smoothing: 0.05  # Less smoothing - we have strong signals
+  max_epochs: 150
+  patience: 25
+  log_interval: 50
+  warmup_epochs: 5  # Warmup for ensemble weights
+
+data:
+  data_dir: /content/geolife_prediction/data/geolife
+  max_len: 50
+  num_workers: 0
+
+experiment:
+  name: domain_informed
+  seed: 42
+  device: cuda
+  checkpoint_dir: checkpoints
+  log_dir: logs
+  result_dir: results
+  save_best_only: true
+  deterministic: true
