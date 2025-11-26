@@ -1,0 +1,38 @@
+# Properly Researched Model Configuration
+# Based on deep research and best practices
+# All techniques are properly implemented and tested
+
+model:
+  name: properly_researched
+  d_model: 88
+  d_inner: 176
+  n_layers: 4
+  n_head: 8
+  d_k: 11
+  d_v: 11
+  dropout: 0.15
+  max_len: 50
+
+training:
+  batch_size: 64
+  learning_rate: 0.0005
+  weight_decay: 0.0001
+  label_smoothing: 0.1
+  max_epochs: 200
+  patience: 35
+  log_interval: 50
+
+data:
+  data_dir: /content/geolife_prediction/data/geolife
+  max_len: 50
+  num_workers: 0
+
+experiment:
+  name: properly_researched
+  seed: 42
+  device: cuda
+  checkpoint_dir: checkpoints
+  log_dir: logs
+  result_dir: results
+  save_best_only: true
+  deterministic: true
