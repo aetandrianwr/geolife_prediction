@@ -7,7 +7,7 @@ model:
   d_model: 96
   n_head: 8
   dim_feedforward: 192
-  n_cycles: 3  # Number of recurrent cycles
+  n_cycles: 5  # Increased from 3
   dropout: 0.1
 
 training:
